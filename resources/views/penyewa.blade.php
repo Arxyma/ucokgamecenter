@@ -1,4 +1,4 @@
-@extends('template')
+,@extends('template')
 @section('content')
 
 <div class="page-heading">
@@ -40,7 +40,7 @@
                             <div class="row">
                             <div class="d-grid gap-1 d-md-flex">
                                 <a href='/penyewa/ubah/{{ $d->id_penyewa }}' class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                <a href='/penyewa/hapus/{{ $d->id_penyewa}}' onclick="return confirm('Apakah anda ingin menghapus data {{$d->id_penyewa}}?')" class="btn btn-sm btn-danger "><i class="bi bi-trash-fill"></i></a>
+                                <a href='/penyewa/hapus/{{ $d->id_penyewa}}' onclick="return confirm('Apakah anda ingin menghapus data {{$d->id_penyewa}}? Jika anda menghapus {{$d->id_penyewa}}, maka data dalam tabel transaksi dan pengembalian akan terhapus juga.')" class="btn btn-sm btn-danger "><i class="bi bi-trash-fill"></i></a>
                             </div>
                             </div>
                         </td>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penyewa;
+use App\Models\Transaksi;
+use App\Models\Pengembalian;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -52,11 +54,19 @@ class PenyewaController extends Controller
     
     public function hapus($id_penyewa)
     {
+         // Menghapus entri dalam tabel "transaksi" berdasarkan id_penyewa
+        $idTransaksi = Transaksi::where('id_penyewa', $id_penyewa)->pluck('id_trx');
+        Pengembalian::whereIn('id_trx', $idTransaksi)->delete(); // Menghapus entri dalam tabel "pengembalian" berdasarkan id_trx
+        Transaksi::where('id_penyewa', $id_penyewa)->delete(); // Menghapus entri dalam tabel "transaksi" berdasarkan id_penyewa
+
+        // Menghapus entri dalam tabel "penyewa" berdasarkan id_penyewa
         $data = Penyewa::where("id_penyewa", $id_penyewa)->delete();
-        if($data) {
-            return redirect('/penyewa')->with(array('status'=>true, 'Berhasil Hapus Data'));
-        } else
-            return json_encode(array('status'=>false, 'Gagal Tambah Data'));
+
+        if ($data) {
+            return redirect('/penyewa')->with(array('status' => true, 'Berhasil Hapus Data'));
+        } else {
+            return json_encode(array('status' => false, 'Gagal Hapus Data'));
+        }
     }
     
     public function ubah($id_penyewa)

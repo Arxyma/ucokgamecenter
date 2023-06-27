@@ -452,7 +452,9 @@ $(document).ready(function () {
     });
 });
 @endcan
+</script>
 
+<script>
 $(document).ready(function() {
   var currentUrl = window.location.pathname; // Mendapatkan path URL halaman saat ini
 
